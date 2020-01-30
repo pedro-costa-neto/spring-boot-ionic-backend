@@ -20,6 +20,7 @@ import com.pedro.cursomc.domain.PagamentoComCartao;
 import com.pedro.cursomc.domain.Pedido;
 import com.pedro.cursomc.domain.Produto;
 import com.pedro.cursomc.domain.enums.EstadoPagamento;
+import com.pedro.cursomc.domain.enums.Perfil;
 import com.pedro.cursomc.domain.enums.TipoCliente;
 import com.pedro.cursomc.repositories.CategoriaRepository;
 import com.pedro.cursomc.repositories.CidadeRepository;
@@ -134,15 +135,20 @@ public class DBService {
 		 * */
 		
 		
-		Cliente cli1 = new Cliente( null, "Maria Silva", "pcon1996@gmail.com", "11111111111", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("12345678"));
+		Cliente cli1 = new Cliente( null, "Maria Silva", "pcon1996@gmail.com", "56024167067", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("12345678"));
 		cli1.getTelefones().addAll( Arrays.asList( "00000000", "11111111" ) );
+		
+		Cliente cli2 = new Cliente( null, "Paulo Silva", "paulo.silva@gmail.com", "29408560019", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("12345678"));
+		cli2.getTelefones().addAll( Arrays.asList( "00000000", "11111111" ) );
+		cli2.addPerfil(Perfil.ADMIN);
 		
 		Endereco e1 = new Endereco( null, "Rua Flores", "300", "Apto 300", "Jardim", "00000000", cli1, c1);
 		Endereco e2 = new Endereco( null, "Avenida Matos", "105", "Sala 800", "Centro", "11111111", cli1, c2);
 		
 		cli1.getEnderecos().addAll( Arrays.asList( e1, e2 ) );
+		cli2.getEnderecos().addAll( Arrays.asList( e2 ) );
 		
-		clienteRepository.saveAll( Arrays.asList( cli1 ) );
+		clienteRepository.saveAll( Arrays.asList( cli1, cli2  ) );
 		enderecoRepository.saveAll( Arrays.asList( e1, e2 ) );
 		
 		
